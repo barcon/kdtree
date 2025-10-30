@@ -5,7 +5,7 @@
 #include "logger.hpp"
 #include "eilig.hpp"
 #include "basis.hpp"
-#include "nodes.hpp"
+#include "node.hpp"
 
 #include <memory>
 #include <vector>
@@ -16,12 +16,12 @@ namespace kdtree
 	using Scalar = eilig::Scalar;
 	using Matrix = eilig::Matrix;
 
-	using INodePtr = nodes::INodePtr;
+	using INodePtr = node::INodePtr;
 	using IBasisPtr = basis::IBasisPtr;
 
-	using NumberNodes = nodes::Number;
+	using NumberNodes = node::Number;
 
-	using Nodes = nodes::Nodes;
+	using Nodes = node::Nodes;
 	using String = utils::String;
 
 	const String headerKDTree = "KDTREE";

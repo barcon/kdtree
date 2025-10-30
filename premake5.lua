@@ -13,7 +13,7 @@ project "kdtree"
 	includedirs { "../logger/src" }	
 	includedirs { "../eilig/src" }	
 	includedirs { "../basis/src" }	
-	includedirs { "../nodes/src" }	
+	includedirs { "../node/src" }	
 
 	files { "src/**.hpp", "src/**.cpp" }
 
