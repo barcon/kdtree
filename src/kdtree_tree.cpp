@@ -38,7 +38,7 @@ namespace kdtree
 	}
 	Tree::Tree()
 	{
-		basis_ = basis::CreateBasisCartesian();
+		basis_ = basis::CreateBasisCartesian(0);
 	}
 	TreePtr Tree::Create()
 	{
@@ -84,7 +84,7 @@ namespace kdtree
 			return nullptr;
 		}
 
-		SearchRecursive(node, head, best, best_distance, 0, basis_->GetDim());
+		SearchRecursive(node, head, best, best_distance, 0, basis_->GetNumberCoordinates());
 
 		if (best == nullptr)
 		{
@@ -109,7 +109,7 @@ namespace kdtree
 			return res;
 		}
 
-		SearchRecursive(node, head, best, 0, basis_->GetDim(), res, radius);
+		SearchRecursive(node, head, best, 0, basis_->GetNumberCoordinates(), res, radius);
 
 		return res;
 	}
@@ -132,7 +132,7 @@ namespace kdtree
 			return res;
 		}
 
-		SearchRecursive(node, head, 0, basis_->GetDim(), res, number, max_distance, index);
+		SearchRecursive(node, head, 0, basis_->GetNumberCoordinates(), res, number, max_distance, index);
 
 		return res;
 	}
@@ -306,7 +306,7 @@ namespace kdtree
 	{
 		if (nodes.size() != 0)
 		{
-			auto k = basis_->GetDim();
+			auto k = basis_->GetNumberCoordinates();
 			unsigned long long int dim = depth % k;
 
 			Nodes left;
