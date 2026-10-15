@@ -113,14 +113,14 @@ namespace kdtree
 
 		return res;
 	}
-	Nodes Tree::SearchNumber(INodePtr node, unsigned long long int number)
+	Nodes Tree::SearchNumber(INodePtr node, Number number)
 	{
 		LeafPtr head = root_;
 		LeafPtr best = nullptr;
 		Nodes res;
 
 		Scalar max_distance = 0.;
-		std::size_t index = 0;
+		Index index = 0;
 
 		if (node == nullptr)
 		{
@@ -167,12 +167,12 @@ namespace kdtree
 
 		return res;
 	}
-	Nodes Tree::SearchNaiveNumber(INodePtr node, unsigned long long int number)
+	Nodes Tree::SearchNaiveNumber(INodePtr node, Number number)
 	{
 		Scalar	distance = 0;
 		Scalar	max_distance = 0;
 		Nodes	found;
-		std::size_t index = 0;
+		Index	index = 0;
 
 		if (node == nullptr)
 		{
@@ -251,10 +251,10 @@ namespace kdtree
 
 		basis_ = basis;
 	}
-	INodePtr Tree::FindMedian(Nodes& nodes, Nodes& left, Nodes& right, std::size_t dim) const
+	INodePtr Tree::FindMedian(Nodes& nodes, Nodes& left, Nodes& right, Dimension dim) const
 	{
 		INodePtr median;
-		std::size_t size = nodes.size();
+		Number size = nodes.size();
 		unsigned int med = static_cast<unsigned int>(std::ceil(size / 2.));
 		unsigned int count = 0;
 
@@ -284,12 +284,12 @@ namespace kdtree
 
 		return median;
 	}
-	Scalar	Tree::FindMaxDistance(const Nodes& nodes, INodePtr node, std::size_t& index) const
+	Scalar	Tree::FindMaxDistance(const Nodes& nodes, INodePtr node, Index& index) const
 	{
 		Scalar distance = 0.;
 		Scalar max_distance = 0.;
 
-		for (std::size_t j = 0; j < nodes.size(); ++j)
+		for (Index j = 0; j < nodes.size(); ++j)
 		{
 			distance = basis_->DistanceSquared(nodes[j]->GetPoint(), node->GetPoint());
 
@@ -302,12 +302,12 @@ namespace kdtree
 
 		return max_distance;
 	}
-	void Tree::MakeTreeRecursive(LeafPtr& head, Nodes& nodes, unsigned long long int depth)
+	void Tree::MakeTreeRecursive(LeafPtr& head, Nodes& nodes, Number depth)
 	{
 		if (nodes.size() != 0)
 		{
 			auto k = basis_->GetNumberCoordinates();
-			unsigned long long int dim = depth % k;
+			Dimension dim = depth % k;
 
 			Nodes left;
 			Nodes right;
@@ -327,7 +327,7 @@ namespace kdtree
 				head->SetRight(rightLeaf);
 		}
 	}
-	void Tree::SearchRecursive(INodePtr node, LeafPtr head, LeafPtr& best, Scalar& best_distance, std::size_t i, std::size_t dim)
+	void Tree::SearchRecursive(INodePtr node, LeafPtr head, LeafPtr& best, Scalar& best_distance, Index i, Dimension dim)
 	{
 		Scalar distance;
 		Scalar dx;
@@ -367,7 +367,7 @@ namespace kdtree
 
 		SearchRecursive(node, dx > 0 ? head->GetRight() : head->GetLeft(), best, best_distance, i, dim);
 	}
-	void Tree::SearchRecursive(INodePtr node, LeafPtr head, LeafPtr& best, std::size_t i, std::size_t dim, Nodes& found, Scalar radius)
+	void Tree::SearchRecursive(INodePtr node, LeafPtr head, LeafPtr& best, Index i, Dimension dim, Nodes& found, Scalar radius)
 	{
 		Scalar distance;
 		Scalar dx;
@@ -402,7 +402,7 @@ namespace kdtree
 
 		SearchRecursive(node, dx > 0 ? head->GetRight() : head->GetLeft(), best, i, dim, found, radius);
 	}
-	void Tree::SearchRecursive(INodePtr node, LeafPtr head, std::size_t i, std::size_t dim, Nodes& found, NumberNodes numberNodes, Scalar& max_distance, std::size_t& index)
+	void Tree::SearchRecursive(INodePtr node, LeafPtr head, Index i, Dimension dim, Nodes& found, NumberNodes numberNodes, Scalar& max_distance, Index& index)
 	{
 		Scalar distance;
 		Scalar dx;

@@ -12,17 +12,9 @@
 
 namespace kdtree
 {
-
-	using Scalar = eilig::Scalar;
-	using Matrix = eilig::Matrix;
-
-	using INodePtr = node::INodePtr;
-	using IBasisPtr = basis::IBasisPtr;
-
-	using NumberNodes = node::Number;
-
-	using Nodes = node::Nodes;
-	using String = utils::String;
+	using namespace eilig;
+	using namespace basis;
+	using namespace node;
 
 	const String headerKDTree = "KDTREE";
 

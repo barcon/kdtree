@@ -26,12 +26,12 @@ class Tree : public std::enable_shared_from_this< Tree >
 
 		INodePtr Search(INodePtr node);
 		Nodes   SearchRadius(INodePtr node, Scalar radius);
-		Nodes   SearchNumber(INodePtr node, unsigned long long int number);
+		Nodes   SearchNumber(INodePtr node, Number number);
 
 		INodePtr SearchNaive(INodePtr node);
 		Nodes	SearchNaiveRadius(INodePtr node, Scalar radius);
-		Nodes	SearchNaiveNumber(INodePtr node, unsigned long long int number);	
-		
+		Nodes	SearchNaiveNumber(INodePtr node, Number number);	
+	
 		LeafPtr GetRoot() const;
 
 		void 	SetBasis(IBasisPtr basis);
@@ -39,13 +39,13 @@ class Tree : public std::enable_shared_from_this< Tree >
 	private:   
 		Tree();		
 		
-		INodePtr FindMedian(Nodes& nodes, Nodes& left, Nodes& right, std::size_t dim) const;
-		Scalar	FindMaxDistance(const Nodes& nodes, INodePtr node, std::size_t& index) const;
+		INodePtr FindMedian(Nodes& nodes, Nodes& left, Nodes& right, Dimension dim) const;
+		Scalar	FindMaxDistance(const Nodes& nodes, INodePtr node, Index& index) const;
 
-		void MakeTreeRecursive(LeafPtr& head, Nodes& nodes, unsigned long long int depth);
-		void SearchRecursive(INodePtr node, LeafPtr head, LeafPtr& best, Scalar& best_distance, std::size_t i, std::size_t dim);
-		void SearchRecursive(INodePtr node, LeafPtr head, LeafPtr& best, std::size_t i, std::size_t dim, Nodes& found, Scalar radius);
-		void SearchRecursive(INodePtr node, LeafPtr head, std::size_t i, std::size_t dim, Nodes& found, NumberNodes numberNodes, Scalar& max_distance, std::size_t& index);
+		void MakeTreeRecursive(LeafPtr& head, Nodes& nodes, Index depth);
+		void SearchRecursive(INodePtr node, LeafPtr head, LeafPtr& best, Scalar& best_distance, Index i, Dimension dim);
+		void SearchRecursive(INodePtr node, LeafPtr head, LeafPtr& best, Index i, Dimension dim, Nodes& found, Scalar radius);
+		void SearchRecursive(INodePtr node, LeafPtr head, Index i, Dimension dim, Nodes& found, NumberNodes numberNodes, Scalar& max_distance, Index& index);
 
 		LeafPtr root_{nullptr};
 		Nodes nodes_{};
