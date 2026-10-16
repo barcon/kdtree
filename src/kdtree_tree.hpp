@@ -7,20 +7,20 @@
 namespace kdtree
 {
 
-void PrintTreeRecursive(const String& prefix, const LeafPtr leaf, bool isLeft);
-void PrintTree(const TreePtr tree);
+	void PrintTreeRecursive(const String& prefix, const LeafPtr leaf, bool isLeft);
+	void PrintTree(const TreePtr tree);
 
-TreePtr CreateTree();
-TreePtr CreateTree(const Nodes& nodes);
+	TreePtr CreateTree();
+	TreePtr CreateTree(const Nodes& nodes);
 
-class Tree : public std::enable_shared_from_this< Tree >
-{        
+	class Tree : public std::enable_shared_from_this< Tree >
+	{
 	public:
 		virtual ~Tree() = default;
 
 		static TreePtr Create();
 		TreePtr GetPtr();
-		ConstTreePtr GetPtr() const;            
+		ConstTreePtr GetPtr() const;
 
 		void MakeTree(const Nodes& nodes);
 
@@ -30,15 +30,15 @@ class Tree : public std::enable_shared_from_this< Tree >
 
 		INodePtr SearchNaive(INodePtr node);
 		Nodes	SearchNaiveRadius(INodePtr node, Scalar radius);
-		Nodes	SearchNaiveNumber(INodePtr node, Number number);	
-	
+		Nodes	SearchNaiveNumber(INodePtr node, Number number);
+
 		LeafPtr GetRoot() const;
 
 		void 	SetBasis(IBasisPtr basis);
-		
-	private:   
-		Tree();		
-		
+
+	private:
+		Tree();
+
 		INodePtr FindMedian(Nodes& nodes, Nodes& left, Nodes& right, Dimension dim) const;
 		Scalar	FindMaxDistance(const Nodes& nodes, INodePtr node, Index& index) const;
 
@@ -47,10 +47,10 @@ class Tree : public std::enable_shared_from_this< Tree >
 		void SearchRecursive(INodePtr node, LeafPtr head, LeafPtr& best, Index i, Dimension dim, Nodes& found, Scalar radius);
 		void SearchRecursive(INodePtr node, LeafPtr head, Index i, Dimension dim, Nodes& found, NumberNodes numberNodes, Scalar& max_distance, Index& index);
 
-		LeafPtr root_{nullptr};
+		LeafPtr root_{ nullptr };
 		Nodes nodes_{};
-		IBasisPtr basis_{nullptr};
-};
+		IBasisPtr basis_{ nullptr };
+	};
 
 } //namespace kd
 

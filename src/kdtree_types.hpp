@@ -16,6 +16,8 @@ namespace kdtree
 	using namespace basis;
 	using namespace node;
 
+	using Dimension = Index;
+
 	const String headerKDTree = "KDTREE";
 
 	class Leaf;
